@@ -1,17 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Register from "./components/Register"; // Ensure this path is correct
-import Login from "./components/Login";  // Ensure Login component exists
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import Main from "./components/Main";
+import "./App.css";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Main />} /> {/* Ensure it's used */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        {/* Add other routes as necessary */}
+        <Route path="/logout" element={<Logout />} />
+        <Route path="*" element={<Login />} /> {/* Default route */}
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

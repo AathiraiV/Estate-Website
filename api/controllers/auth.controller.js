@@ -52,7 +52,7 @@ export const login = async (req, res) => {
 
         console.log("User logged in:", user);
 
-        // ✅ Proper JSON response
+        // ✅   Proper JSON response
         res.status(200).json({ message: "Login successful!", user });
 
     } catch (err) {

@@ -1,7 +1,9 @@
 import express from "express";
-import cors from "cors";  // Import CORS package
-import authRoutes from "./routes/auth.route.js"; // Import your routes (auth routes in this case)
-
+import cors from "cors"; // Import CORS
+import authRoute from "./routes/auth.route.js";
+import postRoute from "./routes/post.route.js";
+import testRoute from "./routes/test.route.js";
+import userRoute from "./routes/user.route.js";
 const app = express();
 
 // Enable CORS globally (if you want to allow all origins)
@@ -10,11 +12,17 @@ app.use(cors());  // This will allow all origins by default
 // Parse incoming JSON requests
 app.use(express.json());
 
-// Use your authentication routes
-app.use("/api/auth", authRoutes);
 
-// Start the server on the specified port (8800 in your case)
-const PORT = process.env.PORT || 8800;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Define your routes
+app.use("/api/posts", postRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/test",testRoute);
+// Start the server
+app.listen(8800, () => {
+    console.log("Server is running on port 8800");
+});
+// Handle errors
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });

@@ -4,14 +4,14 @@ import authRoute from "./routes/auth.route.js";
 import postRoute from "./routes/post.route.js";
 import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
-
 const app = express();
 
-// Enable CORS middleware
-app.use(cors({origin: process.env.FRONTEND_URL, credentials: true})); // This allows cross-origin requests
+// Enable CORS globally (if you want to allow all origins)
+app.use(cors());  // This will allow all origins by default
 
 // Parse incoming JSON requests
 app.use(express.json());
+
 
 // Define your routes
 app.use("/api/posts", postRoute);

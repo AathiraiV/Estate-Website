@@ -1,21 +1,45 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import Main from "./components/Main";
-import "./App.css";
+import HomePage from "./routes/homePage/homePage";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import Layout from "./routes/layout/layout";
+
+import ProfilePage from "./routes/profilePage/profilePage";
+import Login from "./routes/login/login";
+import Register from "./routes/register/register";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children:[
+        {
+          path:"/",
+          element:<HomePage/>
+        },
+
+        {
+          path:"/profile",
+          element:<ProfilePage/>
+        },
+        {
+          path:"/login",
+          element:<Login/>
+        },
+        {
+          path:"/register",
+          element:<Register/>
+        }
+      ]
+    }
+  ]);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Main />} /> {/* Ensure it's used */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="*" element={<Login />} /> {/* Default route */}
-      </Routes>
-    </Router>
+
+    <RouterProvider router={router}/>
   );
 }
 
